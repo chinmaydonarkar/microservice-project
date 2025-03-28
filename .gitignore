@@ -1,0 +1,5 @@
+.env
+gateway/node_modules
+services/auth-service/node_modules
+services/order-service/node_modules
+service/payment-service/node_modules
