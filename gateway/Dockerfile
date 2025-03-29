@@ -12,7 +12,7 @@ RUN npm ci --only=production
 COPY . .
 
 # Expose port for the Gateway service
-EXPOSE 6000
+EXPOSE 8000
 
 # Start the service
 CMD ["node", "src/server.js"]

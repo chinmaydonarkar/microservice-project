@@ -2,7 +2,7 @@ const rateLimit = require("express-rate-limit");
 const RedisStore = require("rate-limit-redis").default; // Fix here
 const Redis = require("ioredis");
 
-const redisClient = new Redis({ host: "redis", port: 6379 });
+const redisClient = new Redis({ host: "localhost", port: 6380 });
 
 module.exports = rateLimit({
   store: new RedisStore({ sendCommand: (...args) => redisClient.call(...args) }),
