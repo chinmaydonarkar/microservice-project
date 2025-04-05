@@ -11,8 +11,8 @@ app.use(rateLimiter);
 app.use(cors());
 
 // Routes forwarding
-app.use("/auth", (req, res) => forwardRequest("http://localhost:4001", req, res));
-app.use("/orders", (req, res) => forwardRequest("http://localhost:4002", req, res));
+app.use("/auth", (req, res) => forwardRequest("http://auth-service:4001", req, res));
+app.use("/orders", (req, res) => forwardRequest("http://order-service:4002", req, res));
 
 // Forwarding function
 async function forwardRequest(url, req, res) {

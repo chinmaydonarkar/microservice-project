@@ -1,31 +1,33 @@
 services:
   gateway:
     build: ./gateway
-    ports:
-      - "8000:8000"
+    deploy:
+      replicas: 3  # Run 4 instances
+    expose:
+      - "8000"  # Expose the service inside Docker Network
     depends_on:
       - auth-service
       - order-service
-      - redis
 
   auth-service:
     build: ./services/auth-service
-    ports:
-      - "4001:4001"
+    deploy:
+      replicas: 3
+    expose:
+      - "4001"  # Expose instead of binding to a static port
 
   order-service:
     build: ./services/order-service
-    ports:
-      - "4002:4002"
-
-  redis:
-    image: "redis:latest"
-    ports:
-      - "6379:6379"
+    deploy:
+      replicas: 3
+    expose:
+      - "4002"
 
   nginx:
     image: nginx:latest
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "80:80"
+      - "80:80"  # Expose Nginx as the main entry point
+    depends_on:
+      - gateway
